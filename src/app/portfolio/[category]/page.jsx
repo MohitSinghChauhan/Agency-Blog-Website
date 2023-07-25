@@ -2,87 +2,39 @@ import React from 'react';
 import styles from './page.module.css';
 import Button from '@/components/button/Button';
 import Image from 'next/image';
+import { items } from './data.js';
+import { notFound } from 'next/navigation';
+
+const getData = (category) => {
+	const data = items[category];
+	if (data) {
+		return data;
+	}
+	return notFound();
+};
 
 const Category = ({ params }) => {
+	const data = getData(params.category);
 	return (
 		<div className={styles.container}>
 			<h1 className={styles.heading}> {params.category} </h1>
-            
-			<div className={styles.item}>
-				<div className={styles.content}>
-					<h1>Test</h1>
-					<p>
-						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate, fuga
-						nemo ad vero, illum sed accusamus culpa in quibusdam voluptate rerum
-						suscipit, facilis voluptatum! Molestiae ut, asperiores porro quibusdam odit
-						eligendi, aperiam possimus cumque rerum eveniet ad accusantium id dolores
-						omnis voluptatum! Maiores sapiente quidem a deserunt reiciendis eius
-						doloribus!
-					</p>
-					<Button
-						text='See More'
-						url='google.com'
-					/>
+			{data.map((item) => (
+				<div className={styles.item} key={item.id}>
+					<div className={styles.content}>
+						<h1>{item.title}</h1>
+						<p>{item.desc}</p>
+						<Button text='See More' url='google.com' />
+					</div>
+					<div className={styles.imgContainer}>
+						<Image
+							className={styles.img}
+							src="https://source.unsplash.com/random/1200x1200"
+							fill={true}
+							alt={params.category}
+						/>
+					</div>
 				</div>
-				<div className={styles.imgContainer}>
-					<Image
-						className={styles.img}
-						src='https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-						fill={true}
-						alt='illustration'
-					/>
-				</div>
-			</div>
-			<div className={styles.item}>
-				<div className={styles.content}>
-					<h1>Test</h1>
-					<p>
-						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate, fuga
-						nemo ad vero, illum sed accusamus culpa in quibusdam voluptate rerum
-						suscipit, facilis voluptatum! Molestiae ut, asperiores porro quibusdam odit
-						eligendi, aperiam possimus cumque rerum eveniet ad accusantium id dolores
-						omnis voluptatum! Maiores sapiente quidem a deserunt reiciendis eius
-						doloribus!
-					</p>
-					<Button
-						text='See More'
-						url='google.com'
-					/>
-				</div>
-				<div className={styles.imgContainer}>
-					<Image
-						className={styles.img}
-						src='https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-						fill={true}
-						alt='illustration'
-					/>
-				</div>
-			</div>
-			<div className={styles.item}>
-				<div className={styles.content}>
-					<h1>Test</h1>
-					<p>
-						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate, fuga
-						nemo ad vero, illum sed accusamus culpa in quibusdam voluptate rerum
-						suscipit, facilis voluptatum! Molestiae ut, asperiores porro quibusdam odit
-						eligendi, aperiam possimus cumque rerum eveniet ad accusantium id dolores
-						omnis voluptatum! Maiores sapiente quidem a deserunt reiciendis eius
-						doloribus!
-					</p>
-					<Button
-						text='See More'
-						url='google.com'
-					/>
-				</div>
-				<div className={styles.imgContainer}>
-					<Image
-						className={styles.img}
-						src='https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-						fill={true}
-						alt='illustration'
-					/>
-				</div>
-			</div>
+			))}
 		</div>
 	);
 };
