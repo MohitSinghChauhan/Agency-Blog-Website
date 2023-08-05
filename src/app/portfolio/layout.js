@@ -1,6 +1,11 @@
 import React from 'react';
 import styles from './page.module.css';
 
+export const metadata = {
+	title: 'Our Work',
+	description: 'Check out our work.',
+};
+
 const Layout = ({ children }) => {
   return (
     <>

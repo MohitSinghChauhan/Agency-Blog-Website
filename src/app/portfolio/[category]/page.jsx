@@ -5,6 +5,12 @@ import Image from 'next/image';
 import { items } from './data.js';
 import { notFound } from 'next/navigation';
 
+export async function generateMetadata({ params }) {
+	return {
+		title: 'Portfolio | ' + params.category.at(0).toUpperCase() + params.category.slice(1),
+	};
+}
+
 const getData = (category) => {
 	const data = items[category];
 	if (data) {
@@ -28,7 +34,7 @@ const Category = ({ params }) => {
 					<div className={styles.imgContainer}>
 						<Image
 							className={styles.img}
-							src="https://source.unsplash.com/random/1200x1200"
+							src='https://source.unsplash.com/random/1200x1200'
 							fill={true}
 							alt={params.category}
 						/>
