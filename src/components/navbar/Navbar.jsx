@@ -43,7 +43,7 @@ const Navbar = () => {
 				className={styles.logo}
 				href='/'
 			>
-				Mohit
+				The Agency Insiders
 			</Link>
 			<div className={styles.links}>
 				<DarkModeToggle />
