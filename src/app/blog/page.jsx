@@ -14,6 +14,13 @@ async function getBlogsData() {
 	return res.json();
 }
 
+
+export const metadata = {
+	title: 'Insiders Blogs',
+	description: 'Read the latest blogs from the insiders of the Big Tech Companies',
+};
+
+
 const Blog = async () => {
 	const blogs = await getBlogsData();
 	return (
