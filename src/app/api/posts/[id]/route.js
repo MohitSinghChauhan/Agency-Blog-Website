@@ -6,7 +6,6 @@ export const GET = async (re,route) => {
 	const id  = route.params.id;  
 	try {
 		await connect();
-		// console.log(params);
 		const post = await Post.findById(id);
 		return NextResponse.json(post);
 	} catch (err) {

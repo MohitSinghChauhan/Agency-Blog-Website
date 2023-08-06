@@ -27,7 +27,6 @@ const handler = NextAuth({
 							credentials.password,
 							user.password
 						);
-						console.log(isPasswordMatch);
 						if (isPasswordMatch) {
 							return user;
 						} else {
