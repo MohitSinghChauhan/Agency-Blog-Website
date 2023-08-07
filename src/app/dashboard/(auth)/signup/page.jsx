@@ -3,11 +3,19 @@ import React, { useState } from 'react';
 import styles from './page.module.css';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import LoadingSkeleton from '@/components/LoadingSkeleton/LoadingSkeleton';
 
 const SignUp = () => {
 	const [error, setError] = useState(null);
-
+	const session = useSession();
 	const router = useRouter();
+	
+	if(session.status === 'loading') return <LoadingSkeleton />;
+	if(session.status === 'authenticated') {
+		router?.push('/dashboard');
+		return <LoadingSkeleton />;
+	}
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();

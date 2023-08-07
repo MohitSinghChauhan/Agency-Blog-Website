@@ -1,18 +1,28 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import styles from './page.module.css';
-// import { useRouter } from 'next/navigation';
+import LoadingSkeleton from '@/components/LoadingSkeleton/LoadingSkeleton';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+
 // import { useState } from 'react';
 
 const Login = () => {
 	// const [error, setError] = useState(null);
+	const session = useSession();
+	const router = useRouter();
+	
+	if(session.status === 'loading') return <LoadingSkeleton />;
+	if(session.status === 'authenticated') {
+		router?.push('/dashboard');
+		return <LoadingSkeleton />;
+	}
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const email = e.target[0].value;
 		const password = e.target[1].value;
-
 		signIn('credentials', {email,password});
 	};
 
@@ -42,6 +52,10 @@ const Login = () => {
 			<button className={styles.button} onClick={() => signIn('google')}>
 				Sign in with Google
 			</button>
+			<span className={styles.or}>- OR -</span>
+			<Link className={styles.link} href='/dashboard/signup'>
+				Register an account
+			</Link>
 		</div>
 	);
 };
