@@ -7,4 +7,12 @@
 - [x] portfolio page and routes with dummy data
 - [x] blog page UI
 - [ ] Dashboard UI + Auth
-- [ ] blog functionality --Need to figure out
+    - [x] Auth
+    - [ ] Dashboard UI
+    - [ ] Dashboard Logic
+        - [ ] Fetch blogs of logged in user
+        - [ ] User able to perform Ops create,update,delete
+        
+- [x] blog functionality
+    - [x] Fetched Blogs from Mongo
+    - [x] Rendered in UI, with caching
