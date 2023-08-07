@@ -6,14 +6,13 @@
 }
 
 .title {
-	color: #f5eded;
 	font-size: 38px;
 }
 
 .subtitle {
-	font-size: 20px;
+	font-size: 18px;
 	margin-bottom: 30px;
-	color: #bbb;
+	color: #77977f;
 	font-weight: 400;
 	margin-top: -10px;
 }
@@ -26,7 +25,7 @@
 }
 
 .input {
-	padding: 20px;
+	padding: 10px;
 	background-color: transparent;
 	border: 2px solid #bbb;
 	border-radius: 5px;
@@ -34,21 +33,35 @@
 	color: #bbb;
 	font-size: 20px;
 	font-weight: bold;
+	transition: all 0.6s ease;
+}
+
+.input:hover {
+	border: 2px solid #419f70;
+}
+
+.input:focus {
+	transform: scale(1.04);
+	border: 2px solid #419f70;
 }
 
 .button {
 	width: 300px;
-	padding: 20px;
+	padding: 10px;
 	cursor: pointer;
-	background-color: #53c28b;
+	background-color: #419f70;
 	border: none;
 	border-radius: 5px;
 	color: #eee;
 	font-weight: bold;
+	transition: all 0.6s ease;
+	text-transform: uppercase;
+
 }
 
 .button:hover {
-	background-color: #49b07d;
+	background-color: #2d714f;
+	transform: scale(1.02);
 }
 
 .or {
@@ -56,18 +69,33 @@
 }
 
 .link {
-	text-decoration: underline;
-	color: #7d7c7c;
+	font-weight: 600;
+	margin-top: -6px;
+	transition: all 0.6s ease;
 }
 
 .link:hover {
-	color: rgb(61, 61, 61);
+	color: #47c184;
+	transform: scale(1.08);
+	font-weight: 700;
 }
-
 .google {
-	background-color: rgba(228, 97, 50, 0.72);
+	display: flex;
+	font-weight: 700;
+	justify-content: center;
+	gap:10px;
+	align-items: center;
+	color: rgb(65, 63, 63);
+	background-color: #f8f8f8;
+	cursor: pointer;
+	transition: all 0.6s ease;
+	border: 1px solid black
 }
 
-.google:hover {
-	background-color: rgba(228, 97, 50, 0.803);
+.google svg {
+	height: 18px;
 }
+.google:hover{
+	background-color: #fff;
+}
+

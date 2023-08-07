@@ -1,23 +1,26 @@
 'use client';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './page.module.css';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import LoadingSkeleton from '@/components/LoadingSkeleton/LoadingSkeleton';
+import { set } from 'mongoose';
 
 const SignUp = () => {
 	const [error, setError] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
 	const session = useSession();
 	const router = useRouter();
-	
-	if(session.status === 'loading') return <LoadingSkeleton />;
-	if(session.status === 'authenticated') {
+
+	if (session.status === 'loading') return <LoadingSkeleton />;
+	if (session.status === 'authenticated') {
 		router?.push('/dashboard');
 		return <LoadingSkeleton />;
 	}
 
 	const handleSubmit = async (e) => {
+		setIsLoading(true);
 		e.preventDefault();
 		const name = e.target[0].value;
 		const email = e.target[1].value;
@@ -39,11 +42,16 @@ const SignUp = () => {
 				router.push(
 					'/dashboard/login?success=Account has been created'
 				);
+
+			setIsLoading(false);
 		} catch (err) {
 			setError(err);
 			console.log(err);
+			setIsLoading(false);
 		}
 	};
+
+	if (isLoading) return <LoadingSkeleton />;
 
 	return (
 		<div className={styles.container}>
