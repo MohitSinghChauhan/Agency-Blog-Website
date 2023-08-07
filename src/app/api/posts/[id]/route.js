@@ -1,9 +1,9 @@
-import connect from '@/utils/db';
+import connect from '@/lib/db';
 import Post from '@/models/PostModel';
 import { NextResponse } from 'next/server';
 
-export const GET = async (re,route) => {
-	const id  = route.params.id;  
+export const GET = async (req, route) => {
+	const id = route.params.id;
 	try {
 		await connect();
 		const post = await Post.findById(id);

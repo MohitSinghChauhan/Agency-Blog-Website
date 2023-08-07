@@ -1,5 +1,5 @@
 'use client';
-import styles from './LoadingSkeleton.module.css';
+import styles from './loadingskeleton.module.css';
 
 const LoadingSkeleton = () => {
 	return (

@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import styles from './page.module.css';
 import Link from 'next/link';
@@ -5,21 +6,19 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 async function getBlogsData() {
-	const res = await fetch('http://localhost:3000/api/posts', {
-		next: { revalidate: 10 },
-	});
+	const res = await fetch(`https://the-agency-insider.vercel.app/api/posts`, { cache: "no-store"} );
+	
 	if (!res.ok) {
 		return notFound();
 	}
 	return res.json();
 }
 
-
-export const metadata = {
-	title: 'Insiders Blogs',
-	description: 'Read the latest blogs from the insiders of the Big Tech Companies',
-};
-
+// export const metadata = {
+// 	title: 'Insiders Blogs',
+// 	description:
+// 		'Read the latest blogs from the insiders of the Big Tech Companies',
+// };
 
 const Blog = async () => {
 	const blogs = await getBlogsData();
