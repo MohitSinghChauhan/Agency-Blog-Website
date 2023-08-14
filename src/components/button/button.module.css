@@ -3,9 +3,22 @@
   font-weight: 600;
   font-size: 16px;
   background-color: #145c06;
-  color: #bbb;
+  color: #c6d3c5;
   width: max-content;
   border-radius: 10px;
   border: none;
   cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0d3e04;
+  color: #fff;
+}
+
+@media screen and (max-width: 600px) {
+  .button {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+  
 }
