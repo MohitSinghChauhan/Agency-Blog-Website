@@ -66,7 +66,7 @@ const Navbar = () => {
 				<div className={`${styles.linkGroup} ${isMenuOpen ? '' : styles.hide}`}>
 					{links.map((link) => {
 						return (
-							<Link href={link.url} key={link.id} className={styles.link}>
+							<Link href={link.url} key={link.id} className={styles.link} onClick={handleToggle}>
 								{link.title}
 							</Link>
 						);
