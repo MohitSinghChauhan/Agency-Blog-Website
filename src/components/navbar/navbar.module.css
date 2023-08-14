@@ -1,26 +1,149 @@
 .container {
-  display: flex;
-  justify-content: space-between;
-  height: 100px;
-  align-items: center;
+	display: flex;
+	justify-content: space-between;
+	height: 100px;
+	align-items: center;
 }
 
-.logo {
-  font-weight: bold;
-  font-size: 1.5rem;
+.logoDesk {
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+
+.logoMob {
+	display: none;
 }
 
 .links {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+	display: flex;
+	gap: 20px;
+	align-items: center;
+}
+
+.linkGroup {
+	display: flex;
+	align-items: center;
+	gap: 20px;
 }
 
 .button {
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
-  background-color: #53c28b;
-  color: white;
-  cursor: pointer;
+	padding: 10px 20px;
+	border-radius: 5px;
+	border: none;
+	background-color: #53c28b;
+	color: white;
+	cursor: pointer;
+}
+
+.hamburger {
+	display: none;
+	transition: all 0.3s ease-in-out;
+}
+
+.hamburgerSVG {
+	width: 30px;
+	height: 40px;
+}
+
+@media screen and (max-width: 768px) {
+	.linkGroup {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		position: absolute;
+		top: 70px;
+		right: 10px;
+		width: 40%;
+		background-color: rgba(0, 0, 0, 0.8);
+		padding: 20px;
+		padding-block: 30px;
+		border-radius: 30px;
+		border-top-right-radius: 0;
+		z-index: 20;
+	}
+
+	.linkGroup {
+		animation: dropdown ease 1s;
+		animation-iteration-count: 1;
+		animation-fill-mode: forwards;
+	}
+
+	@keyframes dropdown {
+		0% {
+			opacity: 0;
+			transform: translateY(-10px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0px);
+		}
+	}
+
+	.linkGroup a {
+		color: white;
+		font-size: 1.2rem;
+	}
+
+	.linkGroup a:hover {
+		color: #53c28b;
+	}
+
+	.logoDesk {
+		display: none;
+	}
+
+	.logoMob {
+		display: block;
+		font-weight: bold;
+		font-size: 1.5rem;
+	}
+
+	.hamburger {
+		display: block;
+		cursor: pointer;
+	}
+
+	.container {
+		width: 90vw;
+	}
+
+	.links {
+		margin-right: 10px;
+	}
+
+	.links a {
+		color: white;
+		font-size: 1.2rem;
+	}
+
+	.links a:hover {
+		color: #53c28b;
+	}
+
+	.logoDesk {
+		display: none;
+	}
+
+	.logoMob {
+		display: block;
+		font-weight: bold;
+		font-size: 1.5rem;
+	}
+
+	.hamburger {
+		display: block;
+		cursor: pointer;
+	}
+
+	.container {
+		width: 90vw;
+	}
+
+	.links {
+		margin-right: 10px;
+	}
+
+	.hide {
+		display: none;
+	}
 }

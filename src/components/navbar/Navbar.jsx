@@ -4,6 +4,10 @@ import React from 'react';
 import styles from './navbar.module.css';
 import DarkModeToggle from '../DarkModeToggle/DarkModeToggle';
 import { signOut, useSession } from 'next-auth/react';
+import { useState } from 'react';
+import hamburgerSVG from 'public/hamburger.svg';
+import crossSVG from 'public/cross.svg';
+import Image from 'next/image';
 
 const links = [
 	{
@@ -39,29 +43,40 @@ const links = [
 ];
 
 const Navbar = () => {
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const session = useSession();
+
+	const handleToggle = () => {
+		setIsMenuOpen(!isMenuOpen);
+	};
+
 	return (
 		<div className={styles.container}>
-			<Link className={styles.logo} href='/'>
+			<Link className={styles.logoDesk} href='/'>
 				The Agency Insiders
+			</Link>
+			<Link className={styles.logoMob} href='/'>
+				😶‍🌫️ Insiders
 			</Link>
 			<div className={styles.links}>
 				<DarkModeToggle />
-				{links.map((link) => {
-					return (
-						<Link
-							href={link.url}
-							key={link.id}
-							className={styles.link}>
-							{link.title}
-						</Link>
-					);
-				})}
-				{session.status === 'authenticated' && (
-					<button className={styles.button} onClick={signOut}>
-						Logout
-					</button>
-				)}
+				<div className={styles.hamburger} onClick={handleToggle}>
+					<Image src={ isMenuOpen ? crossSVG : hamburgerSVG} alt='hamburger' className={styles.hamburgerSVG} />
+				</div>
+				<div className={`${styles.linkGroup} ${isMenuOpen ? '' : styles.hide}`}>
+					{links.map((link) => {
+						return (
+							<Link href={link.url} key={link.id} className={styles.link}>
+								{link.title}
+							</Link>
+						);
+					})}
+					{session.status === 'authenticated' && (
+						<button className={styles.button} onClick={signOut}>
+							Logout
+						</button>
+					)}
+				</div>
 			</div>
 		</div>
 	);
