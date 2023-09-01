@@ -1,6 +1,6 @@
 'use client';
 import LoadingSkeleton from '@/components/LoadingSkeleton/LoadingSkeleton';
-// import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import styles from './page.module.css';
 import { useSession } from 'next-auth/react';
@@ -30,6 +30,8 @@ const Dashboard = () => {
 	//   setIsLoading(false);
 	// },[])
 
+	// State to track which images had loadrrors
+	const [errorImages, setErrorImages] = useState([]);
 	const session = useSession();
 	const router = useRouter();
 	console.log(session);
@@ -54,6 +56,17 @@ const Dashboard = () => {
 		const desc = e.target[1].value;
 		const img = e.target[2].value;
 		const content = e.target[3].value;
+
+		// Validation checks
+		if (!title || !desc || !content) {
+			alert('Title, Description, Image URL and Content are required.');
+			return;
+		}
+
+		if (!isValidURL(img)) {
+			alert('Image URL is not valid.');
+			return;
+		}
 
 		try {
 			await fetch('/api/posts', {
@@ -84,11 +97,29 @@ const Dashboard = () => {
 		}
 	};
 
+	// Function to check if a string is a valid URL
+	function isValidURL(url) {
+		const pattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+		return pattern.test(url);
+	}
+
 	if (session.status === 'loading') return <LoadingSkeleton />;
 	if (session.status === 'unauthenticated') {
 		router.push('/dashboard/login');
 		return <LoadingSkeleton />;
 	}
+
+	// Function to handle image load errors for a specific post
+	const handleImageError = (postId) => {
+		// Update the state to indicate that an error occurred for this post's image
+		setErrorImage(postId);
+	};
+
+	// Function to handle image load errors
+	// Function to mark a specific post's image as having an error
+	const setErrorImage = (postId) => {
+		setErrorImages((prevErrorImages) => [...prevErrorImages, postId]);
+	};
 
 	if (session.status === 'authenticated')
 		return (
@@ -99,7 +130,22 @@ const Dashboard = () => {
 						: data?.map((post) => (
 								<div className={styles.post} key={post._id}>
 									<div className={styles.imgContainer}>
-										<Image src={post.img} alt='' width={200} height={100} />
+										{(!errorImages.includes(post._id) && (
+											<Image
+												src={post.img}
+												alt=''
+												width={200}
+												height={100}
+												onError={() => handleImageError(post._id)}
+											/>
+										)) || (
+											<Image
+												src='https://propertywiselaunceston.com.au/wp-content/themes/property-wise/images/no-image.png'
+												alt=''
+												width={200}
+												height={100}
+											/>
+										)}
 									</div>
 									<h2 className={styles.postTitle}>{post.title}</h2>
 									<span className={styles.delete} onClick={() => handleDelete(post._id)}>
