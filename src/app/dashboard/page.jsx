@@ -129,25 +129,27 @@ const Dashboard = () => {
 						? 'loading'
 						: data?.map((post) => (
 								<div className={styles.post} key={post._id}>
-									<div className={styles.imgContainer}>
-										{(!errorImages.includes(post._id) && (
-											<Image
-												src={post.img}
-												alt=''
-												width={200}
-												height={100}
-												onError={() => handleImageError(post._id)}
-											/>
-										)) || (
-											<Image
-												src='https://propertywiselaunceston.com.au/wp-content/themes/property-wise/images/no-image.png'
-												alt=''
-												width={200}
-												height={100}
-											/>
-										)}
-									</div>
-									<h2 className={styles.postTitle}>{post.title}</h2>
+									<a href={`/blog/${post._id}`}>
+										<div className={styles.imgContainer}>
+											{(!errorImages.includes(post._id) && (
+												<Image
+													src={post.img}
+													alt=''
+													width={200}
+													height={100}
+													onError={() => handleImageError(post._id)}
+												/>
+											)) || (
+												<Image
+													src='https://propertywiselaunceston.com.au/wp-content/themes/property-wise/images/no-image.png'
+													alt=''
+													width={200}
+													height={100}
+												/>
+											)}
+										</div>
+										<h2 className={styles.postTitle}>{post.title}</h2>
+									</a>
 									<span className={styles.delete} onClick={() => handleDelete(post._id)}>
 										X
 									</span>
